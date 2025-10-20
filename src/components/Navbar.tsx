@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react'
-import { TransitionLink } from '@/utils/transitionAnimation'
+import Link from 'next/link'
 import gsap from 'gsap'
 const PARTICLE_COUNT = 100
 const PARTICLE_COLORS = ['#38B9D6', '#34E1EB', '#56E0C9']
@@ -131,7 +131,7 @@ export const Navbar = () => {
       <div ref={containerRef} className='absolute inset-0 pointer-events-none z-0' />
       <div className='z-10 mx-auto w-fit flex items-center gap-6 px-2 text-white font-pPMonumentExtended tracking-wide leading-[2.75rem] text-sm md:w-3/6 md:justify-around md:text-xl'>
         {['work', 'experience', 'skills'].map((label) => (
-          <TransitionLink
+          <Link
             key={label}
             href={`/#${label}`}
             className='relative px-1 py-2 transition hover:scale-105  hover:text-[#38B9D6] md:px-4'
@@ -139,7 +139,7 @@ export const Navbar = () => {
             onMouseLeave={(e) => animateParticles('implode', e.currentTarget)}
           >
             {label}
-          </TransitionLink>
+          </Link>
         ))}
       </div>
       <style jsx global>{`
