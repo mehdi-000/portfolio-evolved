@@ -36,6 +36,7 @@ export const ImageCarousel = ({ imagesPath, directoryPath, onPlayClick }: ImageC
                   fill
                   className='rounded-2xl'
                   sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                  priority
                 />
               </CardContent>
             </Card>

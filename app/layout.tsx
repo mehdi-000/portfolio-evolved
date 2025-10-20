@@ -6,17 +6,16 @@ import localFont from 'next/font/local'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Footer } from '@/components/Footer'
 import { Analytics } from '@vercel/analytics/react'
-import { PostHogProvider } from '@/providers/PostHogProvider'
 
 const title = 'Portfolio'
-const url = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://mehdi-popal.vercel.app'
+const url = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://mehdipopal.dev'
 const description = 'Portfolio of Mehdi Popal'
 const author = 'Mehdi Popal'
 
 export const metadata = {
-  title: 'Next.js + Three.js',
-  description: 'A minimal starter for Nextjs + React-three-fiber and Threejs.',
-  authors: [{ name: author, url: 'https://mehdi-popal.vercel.app' }],
+  title: 'Portfolio',
+  description: 'Portfolio of Mehdi Popal',
+  authors: [{ name: author, url: 'https://mehdipopal.dev/' }],
   publisher: author,
   keywords: 'Software Engineer,Product Manager,Project Manager,Data Scientist,Computer Scientist',
   robots: 'index,follow',
@@ -60,9 +59,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang='en' className='antialiased'>
       <body className={`${pPMonumentExtendedBlack.variable} ${ubuntu.variable} ${heebo.variable} bg-black antialiased`}>
-        <PostHogProvider>
-          <Layout>{children}</Layout>
-        </PostHogProvider>
+        <Layout>{children}</Layout>
         <Analytics />
         <SpeedInsights />
         <Footer />

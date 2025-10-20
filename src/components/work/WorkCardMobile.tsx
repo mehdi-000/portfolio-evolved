@@ -27,6 +27,7 @@ export const WorkCard = ({ src, title, description, usedTechnology, to }: WorkCa
           alt={title}
           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
           className='object-cover transition-transform duration-500 ease-in-out group-hover:scale-110'
+          priority
         />
       </div>
       <div className='font-ubuntu group pointer-events-auto relative z-20 flex w-full flex-col text-center'>
