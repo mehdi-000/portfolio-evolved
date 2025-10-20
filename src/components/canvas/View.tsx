@@ -1,35 +1,48 @@
 'use client'
 
-import { forwardRef, Suspense, useImperativeHandle, useRef } from 'react'
-import { OrbitControls, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
+import { HTMLAttributes, Suspense, useEffect, useRef } from 'react'
+import { Environment, OrbitControls, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
 import { Three } from '@/helpers/components/Three'
+import * as THREE from 'three'
 
-export const Common = ({ color }) => (
+type CommonProps = { color?: THREE.ColorRepresentation; cameraPosition?: THREE.Vector3; environment?: boolean }
+
+type ViewProps = HTMLAttributes<HTMLDivElement> & {
+  orbit?: boolean
+  ref?: React.RefObject<HTMLDivElement>
+}
+
+export const Common = ({ color, cameraPosition, environment }: CommonProps) => (
   <Suspense fallback={null}>
+    <PerspectiveCamera makeDefault fov={75} near={0.1} far={1000} position={cameraPosition ?? [0, 0, 6]} />
     {color && <color attach='background' args={[color]} />}
-    <ambientLight />
-    <pointLight position={[20, 30, 10]} intensity={3} decay={0.2} />
-    <pointLight position={[-10, -10, -10]} color='blue' decay={0.2} />
-    <PerspectiveCamera makeDefault fov={40} position={[0, 0, 6]} />
+    <ambientLight intensity={0.1} />
+    {environment && <Environment preset={'apartment'} backgroundBlurriness={0.5} />}
   </Suspense>
 )
 
-const View = forwardRef(({ children, orbit, ...props }, ref) => {
-  const localRef = useRef(null)
-  useImperativeHandle(ref, () => localRef.current)
+const View = ({ children, orbit, ref, ...props }: ViewProps) => {
+  const localRef = useRef<HTMLDivElement>(null)
+  const trackRef = ref ?? localRef
+
+  useEffect(() => {
+    if (ref && localRef.current) {
+      ref.current = localRef.current
+    }
+  }, [ref])
 
   return (
     <>
       <div ref={localRef} {...props} />
       <Three>
-        <ViewImpl track={localRef}>
+        <ViewImpl track={trackRef}>
           {children}
           {orbit && <OrbitControls />}
         </ViewImpl>
       </Three>
     </>
   )
-})
+}
 View.displayName = 'View'
 
 export { View }

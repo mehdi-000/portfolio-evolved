@@ -1,0 +1,41 @@
+.glow-overlay {
+  --glow-size: 10rem;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: var(--glow-opacity, 0);
+
+  -webkit-mask: radial-gradient(
+    var(--glow-size) var(--glow-size) at var(--glow-x) var(--glow-y),
+    var(--glow-color) 1%,
+    transparent 80%
+  );
+
+  mask: radial-gradient(
+    var(--glow-size) var(--glow-size) at var(--glow-x) var(--glow-y),
+    var(--glow-color) 1%,
+    transparent 60%
+  );
+  transition: 400ms mask ease;
+  will-change: mask;
+}
+
+/* Use background fallback for browsers like Firefox */
+@supports (-moz-appearance: none) {
+  .glow-overlay {
+    --glow-size: 10rem;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    user-select: none;
+    opacity: var(--glow-opacity, 0);
+    background: radial-gradient(
+      var(--glow-size) var(--glow-size) at var(--glow-x) var(--glow-y),
+      var(--glow-color) 1%,
+      transparent 10%
+    );
+    transition: 400ms background ease;
+    will-change: background;
+  }
+}

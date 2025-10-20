@@ -4,7 +4,7 @@ import { extend, useFrame } from '@react-three/fiber'
 import { shaderMaterial } from '@react-three/drei'
 import vertex from './glsl/shader.vert'
 import fragment from './glsl/shader.frag'
-import { forwardRef, useImperativeHandle, useRef } from 'react'
+import { useRef } from 'react'
 
 const ShaderImpl = shaderMaterial(
   {
@@ -17,14 +17,12 @@ const ShaderImpl = shaderMaterial(
 
 extend({ ShaderImpl })
 
-// eslint-disable-next-line react/display-name
-const Shader = forwardRef(({ children, ...props }, ref) => {
+const Shader = ({ children, ref, ...props }) => {
   const localRef = useRef()
+  const elementRef = ref || localRef
 
-  useImperativeHandle(ref, () => localRef.current)
-
-  useFrame((_, delta) => (localRef.current.time += delta))
-  return <shaderImpl ref={localRef} glsl={THREE.GLSL3} {...props} attach='material' />
-})
+  useFrame((_, delta) => (elementRef.current.time += delta))
+  return <shaderImpl ref={elementRef} glsl={THREE.GLSL3} {...props} attach='material' />
+}
 
 export default Shader
