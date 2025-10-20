@@ -40,7 +40,7 @@ export const Experience = () => {
       <div className='relative glow-capture' ref={glowCaptureRef}>
         <div className=' font-heebo bg-gradient-to-br backdrop from-purple-800/5 to-cyan-400/5 border-2 border-pink/5 rounded-3xl p-8 shadow-2xl text-white max-w-2xl mx-auto glow glow:ring-1 glow:border-glow glow:ring-glow glow:bg-glow/[.15]'>
           <div className='text-gray-400 text-sm uppercase font-medium tracking-wider mb-8 text-center glow:text-glow/[.20]'>
-            3+ Years of Experience
+            2+ Years of Experience
           </div>
           <div className='space-y-8'>
             {[

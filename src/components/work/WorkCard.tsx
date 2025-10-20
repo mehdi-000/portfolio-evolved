@@ -10,7 +10,7 @@ import { SiBlender, SiCinema4D, SiPrisma, SiAseprite } from 'react-icons/si'
 import { GrMysql } from 'react-icons/gr'
 import { TbBrandNextjs, TbBrandTypescript } from 'react-icons/tb'
 import { UsedTechList } from '@/components/UsedTechList'
-import * as THREE from 'three'
+import { MathUtils, Vector3 } from 'three'
 import { useTransitionRouter } from '@/utils/transitionAnimation'
 
 const techIcons = {
@@ -71,8 +71,8 @@ export const WorkCard = ({ model, title, description, usedTechnology, to }: Work
     const { camera, pointer } = useThree()
 
     useFrame(() => {
-      camera.position.x = THREE.MathUtils.lerp(camera.position.x, pointer.x * 1.5, 0.07)
-      camera.position.y = THREE.MathUtils.lerp(camera.position.y, -pointer.y * 1.5, 0.07)
+      camera.position.x = MathUtils.lerp(camera.position.x, pointer.x * 1.5, 0.07)
+      camera.position.y = MathUtils.lerp(camera.position.y, -pointer.y * 1.5, 0.07)
       camera.lookAt(0, 1, 0)
     })
 
@@ -90,7 +90,7 @@ export const WorkCard = ({ model, title, description, usedTechnology, to }: Work
         <Suspense fallback={null}>
           <DynamicModel ref={modelRef} />
           <Common
-            cameraPosition={new THREE.Vector3(-0.04244707683370108, 2.42108826638258, -10.075935083882978)}
+            cameraPosition={new Vector3(-0.04244707683370108, 2.42108826638258, -10.075935083882978)}
             environment
           />
           <CameraController />

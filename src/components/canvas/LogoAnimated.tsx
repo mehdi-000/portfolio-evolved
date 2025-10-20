@@ -1,10 +1,8 @@
 'use client'
 import { CustomGeometryParticles } from '@/components/canvas/CustomGeometryParticles'
 import { Suspense } from 'react'
-import { useDeviceOrientation } from '@/templates/hooks/useDeviceOrientation'
-import { Toggle } from '@/components/Toggle'
 import dynamic from 'next/dynamic'
-import * as THREE from 'three'
+import { Vector3 } from 'three'
 
 export const Logoanimated = ({}) => {
   const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
@@ -30,11 +28,6 @@ export const Logoanimated = ({}) => {
       behavior: 'smooth',
     })
   }
-  const { orientation, requestAccess, revokeAccess, error } = useDeviceOrientation()
-
-  const onChange = (toggleState: boolean): void => {
-    const result = toggleState ? requestAccess() : revokeAccess()
-  }
 
   return (
     <>
@@ -48,19 +41,11 @@ export const Logoanimated = ({}) => {
           </Suspense>
         </View>
       </div>
-      <Toggle onChange={onChange} />
       <div className='block h-5/6 md:hidden' onTouchStart={handleLogoTouch}>
         <View className='size-full'>
           <Suspense fallback={null}>
-            <CustomGeometryParticles
-              orientation={orientation}
-              shape='square'
-              picture='/img/mobile_logo.png'
-              isMobile
-              fitToBox
-              animDuration={5}
-            />
-            <Common cameraPosition={new THREE.Vector3(0, 0, 6)} />
+            <CustomGeometryParticles shape='square' picture='/img/mobile_logo.png' isMobile fitToBox animDuration={5} />
+            <Common cameraPosition={new Vector3(0, 0, 6)} />
             <directionalLight />
             <pointLight position={[-30, 0, -30]} power={10.0} />
           </Suspense>

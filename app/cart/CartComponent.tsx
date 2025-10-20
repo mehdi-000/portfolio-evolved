@@ -1,13 +1,12 @@
 'use client'
-import { BakeShadows, CameraControls, Environment } from '@react-three/drei'
+import { CameraControls } from '@react-three/drei'
 import { Suspense, useRef } from 'react'
 import { button, buttonGroup, Leva, useControls } from 'leva'
 import { DEG2RAD } from 'three/src/math/MathUtils.js'
-import { Group, Object3DEventMap } from 'three'
+import { Group, Object3DEventMap, Vector3 } from 'three'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import dynamic from 'next/dynamic'
-import * as THREE from 'three'
 
 export const CartComponent = ({}) => {
   const cameraControlsRef = useRef<CameraControls>(null!)
@@ -90,7 +89,7 @@ export const CartComponent = ({}) => {
           <Cart ref={carRef} />
           <gridHelper position={-1.5} args={[50, 50, 0xc977c7, 'teal']} />
           <ambientLight intensity={0.5} />
-          <Common cameraPosition={new THREE.Vector3(4, 3, 8)} environment />
+          <Common cameraPosition={new Vector3(4, 3, 8)} environment />
         </Suspense>
       </View>
       <div className='md:max-w-45 pt-2 md:pl-2 md:pt-0'>

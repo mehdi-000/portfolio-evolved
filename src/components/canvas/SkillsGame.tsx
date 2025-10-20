@@ -1,7 +1,18 @@
 'use client'
 
 import { Suspense, useEffect, useRef, useState } from 'react'
-import * as THREE from 'three'
+import {
+  Vector3,
+  Color,
+  Object3D,
+  Mesh,
+  Group,
+  MeshBasicMaterial,
+  TubeGeometry,
+  CatmullRomCurve3,
+  BackSide,
+  PerspectiveCamera,
+} from 'three'
 import { useGLTF } from '@react-three/drei'
 import { Text } from '@react-three/drei'
 import dynamic from 'next/dynamic'
@@ -37,12 +48,12 @@ export const curvePath = [
 
 export const points = []
 for (let i = 0; i < curvePath.length; i += 3) {
-  points.push(new THREE.Vector3(curvePath[i], curvePath[i + 1], curvePath[i + 2]))
+  points.push(new Vector3(curvePath[i], curvePath[i + 1], curvePath[i + 2]))
 }
 
 export const Camera = () => {
   const { camera } = useThree()
-  const curvePath = new THREE.CatmullRomCurve3(points)
+  const curvePath = new CatmullRomCurve3(points)
 
   useFrame((state) => {
     const time = state.clock.elapsedTime * 0.1
@@ -63,35 +74,33 @@ export const Camera = () => {
 
 type LaserWithTarget = {
   id: number
-  position: THREE.Vector3
-  impactPos?: THREE.Vector3
+  position: Vector3
+  impactPos?: Vector3
   skill?: string
   butterflyId?: number
-  hitObjectRef?: THREE.Object3D
+  hitObjectRef?: Object3D
   isExploding?: boolean
   scale?: number
   opacity?: number
   shot?: boolean
-  direction?: THREE.Vector3
-  impactColor?: THREE.Color
+  direction?: Vector3
+  impactColor?: Color
 }
 
 export const Crosshair = (props: {
-  ref: React.RefObject<THREE.Group>
-  butterfliesGroupRef: React.RefObject<THREE.Group>
+  ref: React.RefObject<Group>
+  butterfliesGroupRef: React.RefObject<Group>
   shotSkillsRef: React.RefObject<Set<string>>
 }) => {
   const { pointer, camera, raycaster } = useThree()
   const [lasers, setlasers] = useState<Array<LaserWithTarget>>([])
-  const [collectedSkills, setCollectedSkills] = useState<Array<{ id: number; skill: string; position: THREE.Vector3 }>>(
-    [],
-  )
+  const [collectedSkills, setCollectedSkills] = useState<Array<{ id: number; skill: string; position: Vector3 }>>([])
 
   useFrame(() => {
     camera.add(props.ref.current)
     props.ref.current.position.set(pointer.x * 2, pointer.y * 2, -0.9)
 
-    const crosshairPos = new THREE.Vector3()
+    const crosshairPos = new Vector3()
     if (props.ref.current) {
       crosshairPos.setFromMatrixPosition(props.ref.current.matrixWorld)
     }
@@ -99,7 +108,7 @@ export const Crosshair = (props: {
     setlasers((prevLasers) =>
       prevLasers
         .map((laser) => {
-          const laserDirection = laser.direction || new THREE.Vector3()
+          const laserDirection = laser.direction || new Vector3()
           if (!laser.direction) {
             laserDirection.subVectors(crosshairPos, camera.position).normalize().multiplyScalar(0.2)
           }
@@ -134,7 +143,7 @@ export const Crosshair = (props: {
                 isExploding: true,
                 scale: 1.5,
                 opacity: 1.0,
-                impactColor: new THREE.Color(0x3d2fd4),
+                impactColor: new Color(0x3d2fd4),
               }
             }
           }
@@ -156,16 +165,16 @@ export const Crosshair = (props: {
   const handleClick = () => {
     if (!props.ref.current || !props.butterfliesGroupRef.current) return
 
-    const worldPosition = new THREE.Vector3()
+    const worldPosition = new Vector3()
     props.ref.current.getWorldPosition(worldPosition)
 
-    const direction = new THREE.Vector3()
+    const direction = new Vector3()
     direction.subVectors(worldPosition, camera.position).normalize()
     raycaster.set(camera.position, direction)
 
     const intersects = raycaster.intersectObjects(props.butterfliesGroupRef.current.children, true)
 
-    const initialDirection = new THREE.Vector3()
+    const initialDirection = new Vector3()
     initialDirection.subVectors(worldPosition, camera.position).normalize().multiplyScalar(0.2)
 
     let newLaser: LaserWithTarget = {
@@ -184,7 +193,7 @@ export const Crosshair = (props: {
       let hitObject = intersects[0].object
 
       while (hitObject && !hitObject.userData.skill) {
-        hitObject = hitObject.parent as THREE.Object3D
+        hitObject = hitObject.parent as Object3D
       }
 
       if (hitObject?.userData.skill && hitObject.userData.id !== undefined) {
@@ -276,7 +285,7 @@ export const Crosshair = (props: {
 
       <Suspense fallback={null}>
         {collectedSkills.map((skillItem) => (
-          <SkillText key={skillItem.id} skillItem={skillItem} camera={camera} />
+          <SkillText key={skillItem.id} skillItem={skillItem} camera={camera as PerspectiveCamera} />
         ))}
       </Suspense>
     </>
@@ -287,10 +296,10 @@ const SkillText = ({
   skillItem,
   camera,
 }: {
-  skillItem: { id: number; skill: string; position: THREE.Vector3 }
-  camera: THREE.Camera
+  skillItem: { id: number; skill: string; position: Vector3 }
+  camera: PerspectiveCamera
 }) => {
-  const textRef = useRef<THREE.Mesh>(null)
+  const textRef = useRef<Mesh>(null)
 
   useFrame(() => {
     if (textRef.current) {
@@ -310,9 +319,9 @@ const Butterflies = ({
   nodes,
   butterfliesGroupRef,
 }: {
-  butterflies: Array<{ id: number; position: THREE.Vector3; skill: string }>
+  butterflies: Array<{ id: number; position: Vector3; skill: string }>
   nodes: any
-  butterfliesGroupRef: React.RefObject<THREE.Group>
+  butterfliesGroupRef: React.RefObject<Group>
 }) => {
   return (
     <group ref={butterfliesGroupRef}>
@@ -327,10 +336,10 @@ const Butterfly = ({
   butterfly,
   nodes,
 }: {
-  butterfly: { id: number; position: THREE.Vector3; skill: string }
+  butterfly: { id: number; position: Vector3; skill: string }
   nodes: any
 }) => {
-  const groupRef = useRef<THREE.Group>(null)
+  const groupRef = useRef<Group>(null)
 
   useFrame(() => {
     if (groupRef.current) {
@@ -342,9 +351,9 @@ const Butterfly = ({
   return (
     <group ref={groupRef} position={butterfly.position} userData={{ skill: butterfly.skill, id: butterfly.id }}>
       <mesh
-        geometry={(nodes.Curve033_2 as THREE.Mesh).geometry}
+        geometry={(nodes.Curve033_2 as Mesh).geometry}
         material={
-          new THREE.MeshBasicMaterial({
+          new MeshBasicMaterial({
             color: 0x2f4ad4,
             transparent: false,
             opacity: 0.5,
@@ -352,9 +361,9 @@ const Butterfly = ({
         }
       />
       <mesh
-        geometry={(nodes.Curve033_3 as THREE.Mesh).geometry}
+        geometry={(nodes.Curve033_3 as Mesh).geometry}
         material={
-          new THREE.MeshBasicMaterial({
+          new MeshBasicMaterial({
             color: 0x3d2fd4,
             transparent: false,
             opacity: 0.0,
@@ -370,11 +379,11 @@ const Butterfly = ({
 }
 export const NewSkillsGame = () => {
   const { nodes } = useGLTF('/butterfly.glb')
-  const [butterflies, setButterflies] = useState<Array<{ id: number; position: THREE.Vector3; skill: string }>>([])
-  const butterfliesGroupRef = useRef<THREE.Group>(null)
+  const [butterflies, setButterflies] = useState<Array<{ id: number; position: Vector3; skill: string }>>([])
+  const butterfliesGroupRef = useRef<Group>(null)
   const shotSkills = useRef(new Set<string>())
   const skills = [...Object.keys(techIcons)]
-  const crosshairs = useRef<THREE.Group>(null)
+  const crosshairs = useRef<Group>(null)
 
   const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
     ssr: false,
@@ -394,7 +403,7 @@ export const NewSkillsGame = () => {
   const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
   useEffect(() => {
-    const tubeGeo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), 222, 3, 16, true)
+    const tubeGeo = new TubeGeometry(new CatmullRomCurve3(points), 222, 3, 16, true)
     const newButterflies = []
 
     for (let i = 0; i < 50; i++) {
@@ -422,8 +431,8 @@ export const NewSkillsGame = () => {
               <Suspense fallback={null}>
                 <fogExp2 attach='fog' color='black' density={0.3} />
                 <mesh>
-                  <tubeGeometry args={[new THREE.CatmullRomCurve3(points), 222, 3, 16, true]} />
-                  <meshBasicMaterial transparent opacity={0.0} side={THREE.BackSide} />
+                  <tubeGeometry args={[new CatmullRomCurve3(points), 222, 3, 16, true]} />
+                  <meshBasicMaterial transparent opacity={0.0} side={BackSide} />
                 </mesh>
                 {/*
             <line>
@@ -435,7 +444,7 @@ export const NewSkillsGame = () => {
                 <Crosshair ref={crosshairs} butterfliesGroupRef={butterfliesGroupRef} shotSkillsRef={shotSkills} />
                 <Camera />
               </Suspense>
-              <Common cameraPosition={new THREE.Vector3(0, 0, 6)} environment />
+              <Common cameraPosition={new Vector3(0, 0, 6)} environment />
             </View>
           </div>
         </div>

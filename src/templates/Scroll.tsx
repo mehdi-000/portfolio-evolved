@@ -9,14 +9,14 @@ import { addEffect, useFrame } from '@react-three/fiber'
 import Lenis from 'lenis'
 import { useEffect } from 'react'
 import { useRef } from 'react'
-import * as THREE from 'three'
+import { MathUtils } from 'three'
 
 const state = {
   top: 0,
   progress: 0,
 }
 
-const { damp } = THREE.MathUtils
+const { damp } = MathUtils
 
 export default function Scroll({ children }) {
   const content = useRef(null)

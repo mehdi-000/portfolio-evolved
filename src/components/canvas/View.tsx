@@ -3,9 +3,9 @@
 import { HTMLAttributes, Suspense, useEffect, useRef } from 'react'
 import { Environment, OrbitControls, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
 import { Three } from '@/helpers/components/Three'
-import * as THREE from 'three'
+import { ColorRepresentation, Vector3 } from 'three'
 
-type CommonProps = { color?: THREE.ColorRepresentation; cameraPosition?: THREE.Vector3; environment?: boolean }
+type CommonProps = { color?: ColorRepresentation; cameraPosition?: Vector3; environment?: boolean }
 
 type ViewProps = HTMLAttributes<HTMLDivElement> & {
   orbit?: boolean

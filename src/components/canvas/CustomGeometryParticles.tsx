@@ -1,5 +1,5 @@
 'use client'
-import * as THREE from 'three'
+import { Points, ShaderMaterial, Vector3 } from 'three'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { CameraControls } from '@react-three/drei'
 import { useTexture } from '@react-three/drei'
@@ -13,11 +13,11 @@ export const CustomGeometryParticles = (props: any) => {
   const { shape, picture, isMobile, animDuration, camDistance, orientation } = props
 
   const cameraControlsRef = useRef<CameraControls>(null!)
-  const points = useRef<THREE.Points>(null!)
-  const shader = useRef<THREE.ShaderMaterial>(null!)
+  const points = useRef<Points>(null!)
+  const shader = useRef<ShaderMaterial>(null!)
   const vertices: number[] = []
   const initPosition: number[] = []
-  const [cameraTarget, setCameraTarget] = useState<THREE.Vector3>(new THREE.Vector3())
+  const [cameraTarget, setCameraTarget] = useState<Vector3>(new Vector3())
 
   useLayoutEffect(() => {
     cameraControlsRef?.current?.fitToBox(points.current, true)
@@ -25,7 +25,7 @@ export const CustomGeometryParticles = (props: any) => {
 
   useEffect(() => {
     if (cameraControlsRef.current) {
-      const position = new THREE.Vector3()
+      const position = new Vector3()
       cameraControlsRef.current.getTarget(position)
       setCameraTarget(position)
     }
@@ -38,7 +38,7 @@ export const CustomGeometryParticles = (props: any) => {
       const xOffset = -(gamma || 0) * 0.13
       const yOffset = -(beta || 0) * 0.13
 
-      const newPosition = new THREE.Vector3(cameraTarget.x + xOffset, cameraTarget.y + yOffset)
+      const newPosition = new Vector3(cameraTarget.x + xOffset, cameraTarget.y + yOffset)
 
       cameraControlsRef.current.setTarget(newPosition.x, newPosition.y, newPosition.z, true)
     }

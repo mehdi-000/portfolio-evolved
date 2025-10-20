@@ -39,7 +39,6 @@
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.164.1",
     "three-stdlib": "^2.28.9",
-    "troika-three-text": "^0.52.2",
     "tunnel-rat": "^0.1.2",
     "yarn": "^1.22.22"
   },

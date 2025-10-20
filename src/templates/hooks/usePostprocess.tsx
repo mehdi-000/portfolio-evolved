@@ -1,14 +1,25 @@
 import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useMemo } from 'react'
-import * as THREE from 'three'
+import {
+  BufferGeometry,
+  BufferAttribute,
+  Scene,
+  OrthographicCamera,
+  Mesh,
+  WebGLRenderTarget,
+  DepthTexture,
+  RawShaderMaterial,
+  GLSL3,
+  MathUtils,
+} from 'three'
 
 function getFullscreenTriangle() {
-  const geometry = new THREE.BufferGeometry()
+  const geometry = new BufferGeometry()
   const vertices = new Float32Array([-1, -1, 3, -1, -1, 3])
   const uvs = new Float32Array([0, 0, 2, 0, 0, 2])
 
-  geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 2))
-  geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2))
+  geometry.setAttribute('position', new BufferAttribute(vertices, 2))
+  geometry.setAttribute('uv', new BufferAttribute(uvs, 2))
 
   return geometry
 }
@@ -19,17 +30,17 @@ const usePostProcess = () => {
   const { viewport, size, gl } = useThree()
 
   const [screenCamera, screenScene, screen, renderTarget] = useMemo(() => {
-    let screenScene = new THREE.Scene()
-    const screenCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
-    const screen = new THREE.Mesh(getFullscreenTriangle())
+    let screenScene = new Scene()
+    const screenCamera = new OrthographicCamera(-1, 1, 1, -1, 0, 1)
+    const screen = new Mesh(getFullscreenTriangle())
     screen.frustumCulled = false
     screenScene.add(screen)
 
-    const renderTarget = new THREE.WebGLRenderTarget(512, 512, { samples: 4 })
-    renderTarget.depthTexture = new THREE.DepthTexture(512, 512) // fix depth issues
+    const renderTarget = new WebGLRenderTarget(512, 512, { samples: 4 })
+    renderTarget.depthTexture = new DepthTexture(512, 512) // fix depth issues
 
     // use ShaderMaterial for linearToOutputTexel
-    screen.material = new THREE.RawShaderMaterial({
+    screen.material = new RawShaderMaterial({
       uniforms: {
         diffuse: { value: null },
         time: { value: 0 },
@@ -73,9 +84,9 @@ const usePostProcess = () => {
 					pc_fragColor = texture(diffuse, fuv);
         }
       `,
-      glslVersion: THREE.GLSL3,
+      glslVersion: GLSL3,
     })
-    const material = screen.material as THREE.RawShaderMaterial
+    const material = screen.material as RawShaderMaterial
     material.uniforms.diffuse.value = renderTarget.texture
 
     return [screenCamera, screenScene, screen, renderTarget]
@@ -95,7 +106,7 @@ const usePostProcess = () => {
 
     gl.setRenderTarget(null)
     if (screen) {
-      const material = screen.material as THREE.RawShaderMaterial
+      const material = screen.material as RawShaderMaterial
       material.uniforms.time.value += delta
     }
 
