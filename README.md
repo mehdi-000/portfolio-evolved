@@ -1,8 +1,8 @@
 # 🚀 Portfolio Evolved
 
-**[View Live →](https://www.mehdipopal.dev)**
+> **Interactive 3D portfolio** that blends 3D graphics with functional web design.
 
-An interactive developer portfolio that blends 3D graphics with functional web design. Built with Next.js 15, TypeScript, and React Three Fiber.
+**[🌐 Live Demo](https://www.mehdipopal.dev)** | Built with Next.js 15, TypeScript, and React Three Fiber.
 
 ![Lighthouse Performance Report](docs/lighthouse_perfomance.png)
 
@@ -10,23 +10,39 @@ An interactive developer portfolio that blends 3D graphics with functional web d
 
 ## ✨ Highlights
 
-This isn't a typical portfolio site. Every project page is interactive:
+**🎮 Playable Games**  
+Two Unity games fully embedded and playable in the browser
 
-- **Play actual games** – Two Unity games (Way of the Warrior and Time Travel Sync) are fully playable right in the browser
-- **Shoot to reveal skills** – A first-person shooter-style 3D game where you target butterflies flying through space to discover my tech stack
-- **Inspect 3D models** – Interactive cart with camera controls to view from any angle
-- **Animated logo** – Custom particle system using shaders that morphs into the logo on page load
-- **Particle effects** – Hover over navigation links to trigger particle explosions that form button outlines
+**🎯 FPS Skills Shooter**  
+Shoot 3D butterflies flying through space to reveal my tech stack
+
+**🚗 Interactive 3D Models**  
+Cyberpunk cart with camera controls for 360° viewing
+
+**✨ Particle System**  
+Custom GLSL shaders morph thousands of particles into logo
+
+**🎨 Micro-interactions**  
+Hover effects with particle explosions on nav elements
 
 ---
 
 ## 🏔️ The Journey
 
-This started as an experiment: how much interactivity and interesting 3D elements can you pack into a portfolio without destroying the performance & user experience?
+This started as an experiment: How much interactivity and creative 3D elements can you pack into a portfolio without destroying the performance & user experience?
 
-The first version was heavy on visuals and experimental elements but light on structure. I rebuilt it from scratch using the [react-three-next](https://github.com/pmndrs/react-three-next) starter, improving features, adding proper code splitting, accessibility considerations, and a single-canvas architecture. The single-canvas approach might be overkill for this use case, but I wanted to learn the pattern for managing multiple 3D scenes efficiently.
+**Version 1: The Prototype**
 
-What you're seeing now reflects what I learned about balancing creativity with maintainability UX and performance.
+The [first version](https://github.com/mehdi-000/portfolio-protype) was heavy on visuals and experimental elements but light on structure and had some drawbacks.
+
+**Version 2: Prototype Evolved**
+
+I took everything I learned and rebuilt from scratch using [react-three-next](https://github.com/pmndrs/react-three-next) starter, improving features, adding proper code splitting, accessibility considerations, and a single-canvas architecture.
+
+**What I Learned:**  
+The single-canvas approach might be overkill for this use case, but I wanted to learn the pattern for managing multiple 3D scenes efficiently.
+
+> What you're seeing now reflects what I learned about balancing creativity with maintainability UX and performance.
 
 ---
 
@@ -43,23 +59,24 @@ What you're seeing now reflects what I learned about balancing creativity with m
 
 ---
 
-## 🎯 Key Features
+## 🎯 Technical Highlights
 
-### Interactive Elements
+### 🎨 Interactive Features
 
-- **FPS Skills Game**: Camera follows a curved tube path while you shoot 3D butterflies to collect skills
-- **Embedded Games**: itch.io iframes let you play my Unity games directly on the site
-- **3D Model Viewer**: Cyberpunk cart with Leva controls for preset camera angles
-- **Custom Particle System**: GLSL shaders animate thousands of particles into logo shapes
-- **Responsive 3D**: Different 3D configurations for mobile vs desktop
+- FPS-style skills game with camera on curved path
+- Embedded Unity games via itch.io
+- 3D model viewer with preset camera angles
+- Custom GLSL shader particle systems
+- Mobile-optimized 3D experiences
 
-### Technical Approach
+### ⚡ Performance
 
-- **Single Canvas Architecture**: Uses `gl.scissor` to render multiple viewports from one WebGL context
-- **Dynamic Imports**: Heavy 3D components load on-demand to keep initial bundle small
-- **Model Preloading**: GLTF files are preloaded to avoid pop-in
-- **Persistent Canvas**: Canvas stays mounted across route changes to preserve WebGL state
-- **Model Optimization**: The 3D Models are heavily optimized
+- Single canvas for multiple 3D viewports (`gl.scissor`)
+- Dynamic imports for on-demand loading
+- GLTF model preloading
+- Persistent canvas across routes
+- Heavily optimized 3D assets
+- Proper balance between server and client side rendering
 
 ---
 
@@ -67,44 +84,47 @@ What you're seeing now reflects what I learned about balancing creativity with m
 
 ```
 src/
-├── app/                     # Next.js routes & pages
-│   ├── cart/                # 3D cart showcase
-│   ├── wotw/                # Way of the Warrior game
-│   ├── ttsync/              # Time Travel Sync game
-│   └── legacylines/         # Legacy Lines project
+├── app/           # Routes (cart, games, projects)
 ├── components/
-│   ├── canvas/              # 3D components
-│   │   ├── SkillsGame.tsx  # FPS butterfly shooter
-│   │   ├── LogoAnimated.tsx # Particle logo animation
-│   │   └── Models.tsx       # All 3D models
-│   ├── dom/                 # Regular React components
-│   └── ui/                  # Shadcn/ui components
-├── templates/
-│   └── Shader/              # Custom GLSL shaders
-└── public/                  # 3D models and images
+│   ├── canvas/    # 3D: SkillsGame, LogoAnimated, Models
+│   ├── dom/       # React UI components
+│   └── ui/        # Shadcn components
+├── templates/     # GLSL shaders
+└── public/        # 3D models & assets
 ```
 
 ---
 
-## Getting Started
+## 🚀 Quick Start
+
+**Development:**
 
 ```bash
+
+# Clone the repository
 git clone https://github.com/mehdi-000/portfolio-evolved.git
 cd portfolio-evolved
+
+# Install dependencies
 yarn install
+
+# Start development server
 yarn dev
 ```
 
-Build for production:
+**Production:**
 
 ```bash
+# Build production server
 yarn build
+
+# Start server
 yarn start
 ```
 
 ---
 
-## 📊 Performance Metrics
+## 📊 Performance
 
 - ✅ **First Contentful Paint**: < 1.5s
 - ✅ **Time to Interactive**: < 3.0s
