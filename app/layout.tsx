@@ -5,7 +5,7 @@ import { Ubuntu } from 'next/font/google'
 import localFont from 'next/font/local'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Footer } from '@/components/Footer'
-import { Analytics } from '@vercel/analytics/react'
+import { Analytics } from '@vercel/analytics/next'
 
 const title = 'Portfolio'
 const url = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://mehdipopal.dev'
