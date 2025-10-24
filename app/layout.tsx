@@ -7,14 +7,14 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Footer } from '@/components/Footer'
 import { Analytics } from '@vercel/analytics/next'
 
-const title = 'Portfolio'
+const title = 'Mehdi Popal - Software Engineer Portfolio'
 const url = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://mehdipopal.dev'
-const description = 'Portfolio of Mehdi Popal'
+const description = 'Portfolio of Mehdi Popal - Software Engineer with 2 years of experience in full-stack development'
 const author = 'Mehdi Popal'
 
 export const metadata = {
-  title: 'Portfolio',
-  description: 'Portfolio of Mehdi Popal',
+  title: 'Mehdi Popal - Software Engineer Portfolio',
+  description: 'Portfolio of Mehdi Popal - Software Engineer with 2 years of experience in full-stack development',
   authors: [{ name: author, url: 'https://mehdipopal.dev/' }],
   publisher: author,
   keywords: 'Software Engineer,Product Manager,Project Manager,Data Scientist,Computer Scientist',
