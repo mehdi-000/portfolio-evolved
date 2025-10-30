@@ -2,10 +2,11 @@
 import { Navbar } from '@/components/Navbar'
 import { ProjectInfoCard } from '@/components/ProjectInfoCard'
 import { ImageCarousel } from '@/components/ImageCarousel'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Wotw() {
   const [isReadyToPlay, setIsReadyToPlay] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
   const handleReadyToPlay = () => setIsReadyToPlay((prev) => !prev)
   return (
     <>
@@ -38,6 +39,8 @@ export default function Wotw() {
             src='https://itch.io/embed-upload/13405236?color=333333'
             width='960'
             height='620'
+            allowFullScreen
+            allow='fullscreen'
           >
             <a href='https://nixx-studios.itch.io/way-of-the-warrior'>Play Way of the Warrior on itch.io</a>
           </iframe>

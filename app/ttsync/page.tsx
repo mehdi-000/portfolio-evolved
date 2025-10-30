@@ -31,6 +31,8 @@ export default function Ttsync() {
             src='https://itch.io/embed-upload/13405385?color=333333'
             width='960'
             height='620'
+            allowFullScreen
+            allow='fullscreen'
           >
             <a href='https://nixx-studios.itch.io/time-travel-sync'>Play Time Travel Sync on itch.io</a>
           </iframe>
