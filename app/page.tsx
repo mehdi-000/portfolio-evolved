@@ -40,17 +40,17 @@ export default function Page() {
           <Navbar />
           <Logoanimated />
           {/* TODO: fix the background blur */}
-          <div className='absolute md:top-1/2 top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 backdrop-blur-2xl border-pink/5 bg-gradient-to-br from-purple-800/5 to-cyan-400/5 p-6 rounded-xl shadow-lg flex flex-col'>
+          <div className='absolute left-1/2 top-1/3 flex -translate-x-1/2 -translate-y-1/2 flex-col rounded-xl border-2 border-pink/5 bg-gradient-to-br from-purple-800/5 to-cyan-400/5 p-6 shadow-lg backdrop-blur-2xl md:top-1/2'>
             <div className='flex items-center justify-between font-ubuntu'>
               <h1 className='text-xl font-bold'>Mehdi Popal</h1>
-              <div className='flex gap-3 md:ml-0 ml-4'>
+              <div className='ml-4 flex gap-3 md:ml-0'>
                 <button className='button'>
                   <a
                     key='1'
                     href='mailto:mehdipopal@outlook.de'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='border-pink/5 flex size-8 items-center justify-center rounded-lg border hover:bg-sky-950'
+                    className='flex size-8 items-center justify-center rounded-lg border border-pink/5 hover:bg-sky-950'
                   >
                     <Image src='/img/email_icon.png' alt='Email' width={32} height={32} />
                   </a>
@@ -61,7 +61,7 @@ export default function Page() {
                     href='https://github.com/mehdi-000'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='border-pink/5 flex size-8 items-center justify-center rounded-lg border hover:bg-sky-950'
+                    className='flex size-8 items-center justify-center rounded-lg border border-pink/5 hover:bg-sky-950'
                   >
                     <Image src='/img/github_icon.png' alt='Github' width={32} height={32} />
                   </a>
@@ -72,14 +72,14 @@ export default function Page() {
                     href='https://www.linkedin.com/in/mehdi-popal-65a2a525a'
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='border-pink/5 flex size-8 items-center justify-center rounded-lg border shadow-lg hover:bg-sky-950'
+                    className='flex size-8 items-center justify-center rounded-lg border border-pink/5 shadow-lg hover:bg-sky-950'
                   >
                     <Image src='/img/linkedin_icon.png' alt='Linkedin' width={32} height={32} />
                   </a>
                 </button>
               </div>
             </div>
-            <div className='flex items-center text-sm text-gray-400 gap-1'>
+            <div className='flex items-center gap-1 text-sm text-gray-400'>
               <div className='size-4'>
                 <svg style={{ margin: 0 }} viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg'>
                   <path
@@ -92,52 +92,52 @@ export default function Page() {
               </div>
               <p className='font-heebo'>Hamburg, Germany </p>
             </div>
-            <p className='text-gray-300 text-base mt-4 hidden md:block font-heebo'>
+            <p className='mt-4 hidden font-heebo text-base text-gray-300 md:block'>
               I am a Software Engineer with 2 years of experience, skilled in both
               <br className='hidden md:block' />
               front-end and back-end development, with a specialization in web
             </p>
-            <p className='text-gray-300 text-sm mt-4 md:hidden font-heebo'>
+            <p className='mt-4 font-heebo text-sm text-gray-300 md:hidden'>
               I am a fullstack Software Engineer with 2 years of experience
             </p>
           </div>
         </div>
-        <div className='hidden md:block spacer w-full m-16'></div>
-        <div className='flex w-full md:h-20 justify-evenly mb-6'>
-          <h1 id='experience' className='font-pPMonumentExtended tracking-wide text-center text-4xl leading-[2.75rem]'>
+        <div className='spacer m-16 hidden w-full md:block'></div>
+        <div className='mb-6 flex w-full justify-evenly md:h-20'>
+          <h1 id='experience' className='text-center font-pPMonumentExtended text-4xl leading-[2.75rem] tracking-wide'>
             Experience
           </h1>
         </div>
         <div className=''>
           <Experience />
         </div>
-        <div className='spacer w-full m-16'></div>
-        <div className='md:block spacer w-full m-16'></div>
-        <div className='flex w-full mb-4 md:h-20 justify-evenly'>
-          <h2 id='work' className='font-pPMonumentExtended tracking-wide text-4xl leading-[2.75rem]'>
+        <div className='spacer m-16 w-full'></div>
+        <div className='spacer m-16 w-full md:block'></div>
+        <div className='mb-4 flex w-full justify-evenly md:h-20'>
+          <h2 id='work' className='font-pPMonumentExtended text-4xl leading-[2.75rem] tracking-wide'>
             Work
           </h2>
         </div>
         {isMobile ? <MobileWork /> : <Work />}
-        <div className='spacer w-full m-32'></div>
-        <div className='flex w-full md:h-20 justify-evenly mb-8'>
+        <div className='spacer m-32 w-full'></div>
+        <div className='mb-8 flex w-full justify-evenly md:h-20'>
           <div className='text-center'>
             <h1
               id='skills'
-              className='font-pPMonumentExtended tracking-wide text-center text-4xl leading-[2.75rem] mb-2'
+              className='mb-2 text-center font-pPMonumentExtended text-4xl leading-[2.75rem] tracking-wide'
             >
               Skills
             </h1>
           </div>
         </div>
         {isMobile ? (
-          <div className='pt-10 px-4'>
-            <div className='bg-gradient-to-br from-purple-800/5 to-cyan-400/5 border border-pink/5 rounded-2xl p-6 backdrop-blur-sm shadow-lg'>
+          <div className='px-4 pt-10'>
+            <div className='rounded-2xl border border-pink/5 bg-gradient-to-br from-purple-800/5 to-cyan-400/5 p-6 shadow-lg backdrop-blur-sm'>
               <ShownSkills shotSkillsRef={shotSkills} />
             </div>
           </div>
         ) : (
-          <div className='z-10 md:w-[96%] items-center md:flex'>
+          <div className='z-10 items-center md:flex md:w-[96%]'>
             <DynamicSkillsGame />
           </div>
         )}

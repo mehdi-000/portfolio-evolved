@@ -78,7 +78,7 @@ export const CartComponent = ({}) => {
   })
 
   return (
-    <div className='md:h-128 flex size-full flex-col overflow-hidden rounded-xl md:flex-row'>
+    <div className='flex size-full flex-col overflow-hidden rounded-xl md:h-128 md:flex-row'>
       <View className='size-full '>
         <Suspense fallback={null}>
           <CameraControls

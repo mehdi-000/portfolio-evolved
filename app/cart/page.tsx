@@ -44,7 +44,7 @@ export default function CyberpunkCar() {
                   className='embla-slide embla-slide-mobile basis-full pl-1 sm:basis-full md:basis-1/2'
                 >
                   <div className='p-3'>
-                    <Card className='border-pink/5 h-full border-2 bg-inherit'>
+                    <Card className='h-full border-2 border-pink/5 bg-inherit'>
                       <CardContent className='relative h-56 w-full sm:h-64 md:h-80'>
                         <Image
                           src={`/img/cart/${filename}`}
@@ -62,14 +62,14 @@ export default function CyberpunkCar() {
 
               <CarouselItem className='embla-slide hidden pl-1 md:block md:basis-1/2'>
                 <div className='flex h-full items-center justify-center p-3'>
-                  <Card className='border-pink/10 h-full w-full border-2 bg-inherit'>
+                  <Card className='size-full border-2 border-pink/10 bg-inherit'>
                     <CardContent className='flex h-56 w-full flex-col items-center justify-center gap-10 p-6 text-center sm:h-64 md:h-80'>
                       <p className='text-sm leading-relaxed text-white sm:text-base md:text-xl'>
                         Click the show button to see the cart in action!
                       </p>
                       <div className='group relative'>
                         <button
-                          className='transform rounded-lg border-2 border-white/10 bg-white px-10 py-2 ring-0 ring-transparent transition-all duration-300 ease-out group-hover:-translate-y-1 group-hover:text-[#3d2fd4] group-hover:shadow-[0_0_60px_#3d2fd4dd] group-hover:ring-2 group-hover:ring-[#3d2fd4]'
+                          className='rounded-lg border-2 border-white/10 bg-white px-10 py-2 ring-0 ring-transparent transition-all duration-300 ease-out group-hover:-translate-y-1 group-hover:text-[#3d2fd4] group-hover:shadow-[0_0_60px_#3d2fd4dd] group-hover:ring-2 group-hover:ring-[#3d2fd4]'
                           onClick={handlePlayClick}
                         >
                           Show
@@ -80,14 +80,14 @@ export default function CyberpunkCar() {
                 </div>
               </CarouselItem>
             </CarouselContent>
-            <CarouselPrevious className='border-pink/5 border-2 bg-inherit hover:bg-[#c23e91] md:hover:bg-[#38B9D6]' />
-            <CarouselNext className='border-pink/5 border-2 bg-inherit hover:bg-[#c23e91] md:hover:bg-[#38B9D6]' />
+            <CarouselPrevious className='border-2 border-pink/5 bg-inherit hover:bg-[#c23e91] md:hover:bg-[#38B9D6]' />
+            <CarouselNext className='border-2 border-pink/5 bg-inherit hover:bg-[#c23e91] md:hover:bg-[#38B9D6]' />
           </Carousel>
         ) : (
           <CartComponent />
         )}
       </div>
-      <div className='w-full h-14' />
+      <div className='h-14 w-full' />
       <div className='font-heebo md:w-2/5'>
         <ProjectInfoCard
           genre='3D Model'

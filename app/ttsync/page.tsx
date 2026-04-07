@@ -2,41 +2,24 @@
 import { Navbar } from '@/components/Navbar'
 import { ProjectInfoCard } from '@/components/ProjectInfoCard'
 import { ImageCarousel } from '@/components/ImageCarousel'
-import { useState } from 'react'
 
 export default function Ttsync() {
-  const [isReadyToPlay, setIsReadyToPlay] = useState(false)
-  const handlePlayClick = () => setIsReadyToPlay((prev) => !prev)
+  const handlePlayClick = () => {
+    window.open('https://itch.io/embed-upload/13405385?color=333333', '_blank', 'noopener,noreferrer')
+  }
 
   return (
     <>
       <main className='flex flex-col items-center justify-between overflow-hidden p-10 font- bg-[#070707] text-white'>
         <Navbar />
         <div className='h-14 w-full' />
-        {!isReadyToPlay ? (
-          <div className='w-10/12 '>
-            <ImageCarousel
-              onPlayClick={handlePlayClick}
-              imagesPath={['failed_message.png', 'game.png', 'tutorial.png']}
-              directoryPath='ttsync'
-            />
-          </div>
-        ) : (
-          <iframe
-            style={{
-              width: '960px',
-              height: '600px',
-              borderRadius: '12px',
-            }}
-            src='https://itch.io/embed-upload/13405385?color=333333'
-            width='960'
-            height='620'
-            allowFullScreen
-            allow='fullscreen'
-          >
-            <a href='https://nixx-studios.itch.io/time-travel-sync'>Play Time Travel Sync on itch.io</a>
-          </iframe>
-        )}
+        <div className='w-10/12 '>
+          <ImageCarousel
+            onPlayClick={handlePlayClick}
+            imagesPath={['failed_message.png', 'game.png', 'tutorial.png']}
+            directoryPath='ttsync'
+          />
+        </div>
         <div className='w-full h-14' />
         <div className='font-heebo md:w-2/5'>
           <ProjectInfoCard

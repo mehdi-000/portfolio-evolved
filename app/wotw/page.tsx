@@ -2,49 +2,31 @@
 import { Navbar } from '@/components/Navbar'
 import { ProjectInfoCard } from '@/components/ProjectInfoCard'
 import { ImageCarousel } from '@/components/ImageCarousel'
-import { useState, useEffect } from 'react'
 
 export default function Wotw() {
-  const [isReadyToPlay, setIsReadyToPlay] = useState(false)
-  const [isFullscreen, setIsFullscreen] = useState(false)
-  const handleReadyToPlay = () => setIsReadyToPlay((prev) => !prev)
+  const handleReadyToPlay = () => {
+    window.open('https://itch.io/embed-upload/13405236?color=333333', '_blank', 'noopener,noreferrer')
+  }
   return (
     <>
       <main className='font- flex flex-col items-center justify-between overflow-hidden bg-[#070707] p-10 text-white'>
         <Navbar />
         <div className='h-14 w-full' />
-        {!isReadyToPlay ? (
-          <div className='w-10/12 '>
-            <ImageCarousel
-              onPlayClick={handleReadyToPlay}
-              imagesPath={[
-                'titlescreen.png',
-                'game_tutorial.png',
-                'intro.png',
-                'middle_ages_intro.png',
-                'portal_menu.png',
-                'cyberpunk_v.png',
-                'ancient_egypt_t.png',
-              ]}
-              directoryPath='wotw'
-            />
-          </div>
-        ) : (
-          <iframe
-            style={{
-              width: '960px',
-              height: '600px',
-              borderRadius: '12px',
-            }}
-            src='https://itch.io/embed-upload/13405236?color=333333'
-            width='960'
-            height='620'
-            allowFullScreen
-            allow='fullscreen'
-          >
-            <a href='https://nixx-studios.itch.io/way-of-the-warrior'>Play Way of the Warrior on itch.io</a>
-          </iframe>
-        )}
+        <div className='w-10/12 '>
+          <ImageCarousel
+            onPlayClick={handleReadyToPlay}
+            imagesPath={[
+              'titlescreen.png',
+              'game_tutorial.png',
+              'intro.png',
+              'middle_ages_intro.png',
+              'portal_menu.png',
+              'cyberpunk_v.png',
+              'ancient_egypt_t.png',
+            ]}
+            directoryPath='wotw'
+          />
+        </div>
         <div className='w-full h-14' />
         <div className='md:w-2/5 font-heebo'>
           <ProjectInfoCard

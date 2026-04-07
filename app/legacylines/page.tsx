@@ -9,9 +9,9 @@ export default function LegacyLines() {
   return (
     <main className='font- flex flex-col items-center justify-between overflow-hidden bg-[#070707] p-10 text-white'>
       <Navbar />
-      <div className='w-full h-14' />
+      <div className='h-14 w-full' />
       <div className='w-10/12 '>
-        <Carousel opts={{ loop: true }} className='w-full max-w-(--breakpoint-xl)'>
+        <Carousel opts={{ loop: true }} className='max-w-(--breakpoint-xl) w-full'>
           <CarouselContent className='-ml-1'>
             {[
               'add_family_dark.png',
@@ -22,10 +22,10 @@ export default function LegacyLines() {
               'familytree_light.png',
               'map_light.png',
             ].map((filename, index) => (
-              <CarouselItem key={index} className='pl-1 basis-full sm:basis-1/2 md:basis-1/2'>
+              <CarouselItem key={index} className='basis-full pl-1 sm:basis-1/2 md:basis-1/2'>
                 <div className='p-3'>
-                  <Card className='border-2 border-pink/5 bg-inherit h-full'>
-                    <CardContent className='relative h-56 sm:h-64 md:h-80 w-full'>
+                  <Card className='h-full border-2 border-pink/5 bg-inherit'>
+                    <CardContent className='relative h-56 w-full sm:h-64 md:h-80'>
                       <Image
                         src={`/img/legacylines/${filename}`}
                         alt={filename}
@@ -40,8 +40,8 @@ export default function LegacyLines() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className='bg-inherit border-2 border-pink/5 hover:bg-[#c23e91] md:hover:bg-[#38B9D6]' />
-          <CarouselNext className='bg-inherit border-2 border-pink/5 hover:bg-[#c23e91] md:hover:bg-[#38B9D6]' />
+          <CarouselPrevious className='border-2 border-pink/5 bg-inherit hover:bg-[#c23e91] md:hover:bg-[#38B9D6]' />
+          <CarouselNext className='border-2 border-pink/5 bg-inherit hover:bg-[#c23e91] md:hover:bg-[#38B9D6]' />
         </Carousel>
       </div>
       {/*
@@ -52,7 +52,7 @@ export default function LegacyLines() {
           ></iframe>
       </div>
        */}
-      <div className='w-full h-14' />
+      <div className='h-14 w-full' />
       <div className='font-heebo md:w-2/5'>
         <ProjectInfoCard
           genre='Website'
@@ -69,25 +69,25 @@ export default function LegacyLines() {
         />
         <div className='h-6 w-full' />
         <h2 className='text-xl font-bold'>Where can I access the page?</h2>
-        <p className='text-gray-300 text-sm leading-relaxed my-4'>
+        <p className='my-4 text-sm leading-relaxed text-gray-300'>
           I used to have it linked here, but I&apos;m currently working on improvements. I&apos;ll put it back up once
           it&apos;s finished.
         </p>
         <h2 className='text-xl font-bold'>Why can&apos;t I see any family trees?</h2>
-        <p className='text-gray-300 text-sm leading-relaxed my-4'>
+        <p className='my-4 text-sm leading-relaxed text-gray-300'>
           You need to be logged in to access the features of the site. Once you&apos;re in, you can create profiles, add
           or modify family trees, and manage access for other accounts.
         </p>
 
         <h2 className='text-xl font-bold'>Why is the design so...?</h2>
-        <p className='text-gray-300 text-sm leading-relaxed my-4'>
+        <p className='my-4 text-sm leading-relaxed text-gray-300'>
           I built this app under a tight deadline while experimenting with new ideas, so the design and UX are a bit
           &quot;unique.&quot; That said, I really like the concept and plan to revisit and improve the site when I have
           more time.
         </p>
 
         <h2 className='text-xl font-bold'>I don&apos;t speak German?</h2>
-        <p className='text-gray-300 text-sm leading-relaxed my-4'>
+        <p className='my-4 text-sm leading-relaxed text-gray-300'>
           No worries! I plan to fully rework this project in the future with a better design, improved UX, English
           translation, and a bunch of new features.
         </p>
